@@ -1,0 +1,64 @@
+body{
+    background-image: url(../images/halloween-Website_Background_pumpkins_2560x16001.jpg);
+}
+.container {
+    align-self: auto;
+    height: 600px;
+    width: 900px;
+    border-width: 5px;
+    border-color: black;
+    margin-top: 100px;
+    
+}
+#start {
+    text-align: center;
+    margin-top: 175px;
+    font-size: 50px;
+    font-weight: bolder;
+    border-width: 5px;
+    border-color: green;
+    border-style: outset;
+    width: 300px;
+    margin-left:280px;
+    position: absolute;
+    z-index: 3;
+    display: block;
+}
+#start:hover{
+    background-color: red;
+}
+#section{
+    border-style: outset;
+    border-width: 2px;
+    border-color: green;
+    height: 500px;
+    text-align: center;
+}
+
+#score{
+    display: none;
+}
+.choice {
+    border-style: outset;
+    border-width: 2px;
+    border-color: green;
+    width: 400px;
+    height: 50px;
+    float: left;
+    margin-left: 30px;
+    margin-top: 50px;
+}
+#image {
+    border-style: outset;
+    border-width: 2px;
+    border-color: green;
+    width: 200px;
+    height: 200px;
+    margin-top: 45px;
+}
+.choice,
+#question,
+#counter,
+#scoreDiv {
+    color: white;
+}
