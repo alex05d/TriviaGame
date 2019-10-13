@@ -135,19 +135,23 @@ $(document).ready(function () {
 function checkAnswer(answer) {
     if (answer == questions[runningQuestion].correct) {
         score++;
-        alert("correct");
+        clearInterval(time);
+        renderQuestion++;
+        renderQuestion();
+        correctAnswer(answer);
     } else if (answer != questions[runningQuestion].correct) {
         missed++;
+        wrongAnswer();
     };
 
 };
 
 function correctAnswer() {
-
+    $(checkAnswer).css("background-color", "green");
 };
 
 function wrongAnswer() {
-
+    $(".choice").css("background-color", "red");
 };
 
 function renderScore() {

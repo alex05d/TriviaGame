@@ -56,9 +56,11 @@ body{
     height: 200px;
     margin-top: 45px;
 }
-.choice,
 #question,
 #counter,
 #scoreDiv {
     color: white;
+}
+.choice{
+    color: black;
 }
