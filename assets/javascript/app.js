@@ -81,70 +81,91 @@ let questions = [{
 
 const lastQuestion = questions.length - 1;
 var runningQuestion = 0;
-var time = 5;
+var time = 10;
 var timer;
 var score = 0;
 var count = 0;
 var missed = 0;
 
-$(document).ready(function () {
-    function renderQuestion() {
-        let q = questions[runningQuestion];
+console.log(time);
 
 
-        $("#question").text(q.question);
-        $("#image").append("<img src=" + q.imgSrc + ">");
-        $("#A").text(q.choiceA);
-        $("#B").text(q.choiceB);
-        $("#C").text(q.choiceC);
-        $("#D").text(q.choiceD);
-
-    };
-
-    $("#start").click(function () {
-        $(this).hide();
-        $("#quiz").css("display", "block");
-        renderQuestion();
-        timer = setInterval(renderCounter, 1000);
-    });
-
-    function renderCounter() {
-
-        time--;
-        $("#counter").html(time);
-
-        if (time === 0) {
-            clearInterval(time);
-            time = 5;
-            if (runningQuestion < lastQuestion) {
-                runningQuestion++;
-                renderQuestion();
-            } else if (runningQuestion == lastQuestion) {
-                clearInterval(timer);
-                renderScore();
-            };
-
-        };
-
-    };
+function renderQuestion() {
+    let q = questions[runningQuestion];
 
 
-
-});
-
-function checkAnswer(answer) {
-    if (answer == questions[runningQuestion].correct) {
-        score++;
-        clearInterval(time);
-        renderQuestion++;
-        renderQuestion();
-        correctAnswer(answer);
-    } else if (answer != questions[runningQuestion].correct) {
-        missed++;
-        wrongAnswer();
-    };
+    $("#question").text(q.question);
+    $("#image").append("<img src=" + q.imgSrc + ">");
+    $("#A").text(q.choiceA);
+    $("#B").text(q.choiceB);
+    $("#C").text(q.choiceC);
+    $("#D").text(q.choiceD);
 
 };
+
+$("#start").click(function () {
+    $(this).hide();
+    $("#quiz").css("display", "block");
+    renderQuestion();
+    // timer = setInterval(renderCounter, 1000);
+});
+timer = setInterval(renderCounter, 1000);
+
+function renderCounter() {
+    clearInterval(time);
+    time--;
+    $("#counter").html(time);
+};
+
+var rightAnswer = questions[runningQuestion].correct;
+
+function checkAnswer(answer) {
+    if (answer == rightAnswer) {
+        score++;
+        runningQuestion++;
+        renderQuestion();
+        renderCounter();
+    }
+    if (answer != rightAnswer || time === 0 || runningQuestion < lastQuestion) {
+        missed++;
+        runningQuestion++
+        //clearInterval(time);
+        renderQuestion();
+        renderCounter();
+    }
+    if (runningQuestion === lastQuestion && time === 0) {
+        clearInterval(timer);
+        renderScore();
+    };
+};
+
+//timer = setInterval(renderCounter, 1000);
+//function renderCounter() {
+//clearInterval(time);
+//time--;
+//$("#counter").html(time);
+
+//if (time === 0) {
+
+// time = 10;
+//if (runningQuestion < lastQuestion) {
+//    missed++;
+//clearInterval(time);
+//time = 10;
+//    runningQuestion++;
+//    renderQuestion();
+//}
+// if (runningQuestion == lastQuestion) {
+//  missed++;
+
+// };
+
+//};
+
+console.log(renderCounter());
+
+//};
+
 
 function correctAnswer() {
     $(checkAnswer).css("background-color", "green");
@@ -155,6 +176,7 @@ function wrongAnswer() {
 };
 
 function renderScore() {
+    $("#timer").css("display", "none");
     $("#scoreDiv").css("display", "block");
     $("#scoreDiv").html("<p> Right Answers:" + score + "</p>");
     $("#scoreDiv").append("<p>Wrong Answers:" + missed + "</p>");
