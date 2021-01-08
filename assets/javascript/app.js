@@ -43,7 +43,7 @@ let questions = [{
     choiceB: "10",
     choiceC: "9",
     choiceD: "4",
-    correct: "9"
+    correct: "C"
 }, {
     question: "What is the name of the camp from Sleepaway Camp?",
     imgSrc: "",
@@ -82,17 +82,23 @@ let questions = [{
 const lastQuestion = questions.length - 1;
 var runningQuestion = 0;
 var time = 10;
-var timer;
+var timer = setInterval(renderCounter, 1000);
 var score = 0;
 var count = 0;
 var missed = 0;
 
-console.log(time);
 
+$("#start").click(function () {
+    $(this).hide();
+    $("#quiz").css("display", "block");
+    renderQuestion();
+});
 
 function renderQuestion() {
     let q = questions[runningQuestion];
-
+    clearInterval(timer);
+    time = 11;
+    timer = setInterval(renderCounter, 1000);
 
     $("#question").text(q.question);
     $("#image").append("<img src=" + q.imgSrc + ">");
@@ -100,80 +106,48 @@ function renderQuestion() {
     $("#B").text(q.choiceB);
     $("#C").text(q.choiceC);
     $("#D").text(q.choiceD);
-
 };
 
-$("#start").click(function () {
-    $(this).hide();
-    $("#quiz").css("display", "block");
-    renderQuestion();
-    // timer = setInterval(renderCounter, 1000);
-});
-timer = setInterval(renderCounter, 1000);
 
 function renderCounter() {
-    clearInterval(time);
     time--;
     $("#counter").html(time);
-};
 
-var rightAnswer = questions[runningQuestion].correct;
-
-function checkAnswer(answer) {
-    if (answer == rightAnswer) {
-        score++;
-        runningQuestion++;
-        renderQuestion();
-        renderCounter();
-    }
-    if (answer != rightAnswer || time === 0 || runningQuestion < lastQuestion) {
+    if (questions.length - 1 === lastQuestion && time === 0) {
         missed++;
-        runningQuestion++
-        //clearInterval(time);
-        renderQuestion();
-        renderCounter();
-    }
-    if (runningQuestion === lastQuestion && time === 0) {
         clearInterval(timer);
         renderScore();
+    } else if (time === 0) {
+        runningQuestion++;
+        missed++;
+        renderQuestion();
     };
 };
 
-//timer = setInterval(renderCounter, 1000);
-//function renderCounter() {
-//clearInterval(time);
-//time--;
-//$("#counter").html(time);
 
-//if (time === 0) {
+function checkAnswer(answer) {
 
-// time = 10;
-//if (runningQuestion < lastQuestion) {
-//    missed++;
-//clearInterval(time);
-//time = 10;
-//    runningQuestion++;
-//    renderQuestion();
-//}
-// if (runningQuestion == lastQuestion) {
-//  missed++;
+    var rightAnswer = questions[runningQuestion].correct;
 
-// };
+    if (answer === rightAnswer) {
+        score++;
+    } else {
+        missed++;
+    }
 
-//};
+    if (lastQuestion === runningQuestion) {
+        clearInterval(timer);
+        renderScore();
+    } else {
+        runningQuestion++
+        renderQuestion();
+        renderCounter();
+    }
 
-console.log(renderCounter());
-
-//};
-
-
-function correctAnswer() {
-    $(checkAnswer).css("background-color", "green");
 };
 
-function wrongAnswer() {
-    $(".choice").css("background-color", "red");
-};
+
+
 
 function renderScore() {
     $("#timer").css("display", "none");
