@@ -18,14 +18,18 @@
         <div class="row">
             <div class="col-md-12 align-middle" id="section">
                 <button class="align-middle" id="start" style="display: block">Start Trivia</button>
+                <button class="align-middle invisible" id="reload" onClick="window.location.reload()"
+                    style="display: block">Try Again!</button>
                 <div id="quiz" style="display:none">
-                    <div id="image"></div>
+                    <div class="col-md-3 fluid" id="image">
+                        <img id="hint" src="" alt="">
+                    </div>
                     <div id="scoreDiv" style="display:none"></div>
                     <div id="timer">
                         <div id="counter"></div>
                     </div>
                     <div id="question"></div>
-                    <div id="choices">
+                    <div class='col-md-12' id="choices">
                         <button class="choice" id="A" onClick="checkAnswer('A')"></button>
                         <button class="choice" id="B" onClick="checkAnswer('B')"></button>
                         <button class="choice" id="C" onClick="checkAnswer('C')"></button>

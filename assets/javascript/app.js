@@ -14,7 +14,7 @@ const scoreDiv = document.getElementById("#score");
 
 let questions = [{
     question: "Who was the villan in the original Friday the 13th?",
-    imgSrc: "",
+    imgSrc: "assets/images/friday13Question1.jpg",
     choiceA: "Jason Voorhees",
     choiceB: "Pamela Voorhees",
     choiceC: "Elias Voorhees",
@@ -22,7 +22,7 @@ let questions = [{
     correct: "B"
 }, {
     question: "A Nightmare on Elm Street takes place where?",
-    imgSrc: "",
+    imgSrc: "assets/images/nightMareOnElmStQ2.jpg",
     choiceA: "Springwood, Ohio",
     choiceB: "Cunningham County, New Jeresy",
     choiceC: "Dallas, tx",
@@ -30,7 +30,7 @@ let questions = [{
     correct: "A"
 }, {
     question: "Who did Captin Elliot Spencer become?",
-    imgSrc: "",
+    imgSrc: "assets/images/hellraiserQ3.jpg",
     choiceA: "Lawnmower Man",
     choiceB: "Tall man",
     choiceC: "Jigsaw",
@@ -38,7 +38,7 @@ let questions = [{
     correct: "D"
 }, {
     question: "How many Michael Myers Halloween movies are there?",
-    imgSrc: "",
+    imgSrc: "assets/images/HalloweenQ4.jpg",
     choiceA: "8",
     choiceB: "10",
     choiceC: "9",
@@ -46,7 +46,7 @@ let questions = [{
     correct: "C"
 }, {
     question: "What is the name of the camp from Sleepaway Camp?",
-    imgSrc: "",
+    imgSrc: "assets/images/sleepawayCampQ5.jpg",
     choiceA: "Camp Lickalotta",
     choiceB: "Camp Arawak",
     choiceC: "Camp Flabanabba",
@@ -54,7 +54,7 @@ let questions = [{
     correct: "B"
 }, {
     question: "How many version of The Thing are there?",
-    imgSrc: "",
+    imgSrc: "assets/images/theThingQ6.jpg",
     choiceA: "1",
     choiceB: "3",
     choiceC: "2",
@@ -62,7 +62,7 @@ let questions = [{
     correct: "B"
 }, {
     question: "What is This Object?",
-    imgSrc: "",
+    imgSrc: "assets/images/hellraiserBoxQ7.jpg",
     choiceA: "The Lament Configuration",
     choiceB: "A means to summon the Cenobites",
     choiceC: "Lemerchand Configuration",
@@ -70,7 +70,7 @@ let questions = [{
     correct: "D"
 }, {
     question: "Finish the quote: 'Agnes, its me--'",
-    imgSrc: "",
+    imgSrc: "assets/images/blackChristmasQ8.jpg",
     choiceA: "Billy",
     choiceB: "Timmy",
     choiceC: "Willy",
@@ -100,8 +100,10 @@ function renderQuestion() {
     time = 11;
     timer = setInterval(renderCounter, 1000);
 
+    $('#hint').attr("src", q.imgSrc);
+
     $("#question").text(q.question);
-    $("#image").append("<img src=" + q.imgSrc + ">");
+    // $("#image").append("<img src=" + q.imgSrc + ">");
     $("#A").text(q.choiceA);
     $("#B").text(q.choiceB);
     $("#C").text(q.choiceC);
@@ -113,7 +115,7 @@ function renderCounter() {
     time--;
     $("#counter").html(time);
 
-    if (questions.length - 1 === lastQuestion && time === 0) {
+    if (questions.length - 1 === runningQuestion && time === 0) {
         missed++;
         clearInterval(timer);
         renderScore();
@@ -154,6 +156,7 @@ function renderScore() {
     $("#scoreDiv").css("display", "block");
     $("#scoreDiv").html("<p> Right Answers:" + score + "</p>");
     $("#scoreDiv").append("<p>Wrong Answers:" + missed + "</p>");
+    $("#reload").attr("class", "visible");
 
 };
 

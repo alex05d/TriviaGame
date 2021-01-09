@@ -24,14 +24,32 @@ body{
     z-index: 3;
     display: block;
 }
-#start:hover{
+#reload{
+     text-align: center;
+    margin-top: 100px;
+    font-size: 50px;
+    font-weight: bolder;
+    border-width: 5px;
+    border-color: green;
+    border-style: outset;
+    width: 300px;
+    margin-left:280px;
+    position: absolute;
+    z-index: 3;
+    display: block;
+}
+#reload:hover{
     background-color: red;
+}
+#start:hover{
+    background-color: greenyellow;
 }
 #section{
     border-style: outset;
     border-width: 2px;
     border-color: green;
-    height: 500px;
+    min-height: 500px;
+    max-height: auto;
     text-align: center;
 }
 
@@ -42,19 +60,15 @@ body{
     border-style: outset;
     border-width: 2px;
     border-color: green;
-    width: 400px;
+    width: 350px;
     height: 50px;
     float: left;
-    margin-left: 30px;
-    margin-top: 50px;
+    margin: 30px;
 }
 #image {
-    border-style: outset;
     border-width: 2px;
-    border-color: green;
-    width: 200px;
-    height: 200px;
     margin-top: 45px;
+    display: flex;
 }
 #question,
 #counter,
@@ -63,4 +77,10 @@ body{
 }
 .choice{
     color: black;
+}
+#hint{
+    min-height: 175px;
+    max-width: 200px;
+    max-height: 200px;
+    object-fit: cover;
 }
